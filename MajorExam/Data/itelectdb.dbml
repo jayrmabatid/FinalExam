@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="MABATID_JAYR" Class="itelectdbDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=VMClassmateOne\SQLEXPRESS;Initial Catalog=MABATID_JAYR;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DefaultConnection" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.MstUser" Member="MstUsers">
+    <Type Name="MstUser">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UserTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AspNetUserId" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="NChar(1255) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="MstUser_MstLibraryCard" Member="MstLibraryCards" ThisKey="Id" OtherKey="LibraryInChargeUserId" Type="MstLibraryCard" />
+      <Association Name="MstUser_MstLibraryCard1" Member="MstLibraryCards1" ThisKey="Id" OtherKey="CreatedByUserId" Type="MstLibraryCard" />
+      <Association Name="MstUser_MstLibraryCard2" Member="MstLibraryCards2" ThisKey="Id" OtherKey="UpdatedByUserId" Type="MstLibraryCard" />
+      <Association Name="MstUser_MstLibraryBook" Member="MstLibraryBooks" ThisKey="Id" OtherKey="CreatedByUserId" Type="MstLibraryBook" />
+      <Association Name="MstUser_MstLibraryBook1" Member="MstLibraryBooks1" ThisKey="Id" OtherKey="UpdatedByUserId" Type="MstLibraryBook" />
+      <Association Name="MstUser_TrnBorrow" Member="TrnBorrows" ThisKey="Id" OtherKey="UpdatedByUserId" Type="TrnBorrow" />
+      <Association Name="MstUser_TrnBorrow1" Member="TrnBorrows1" ThisKey="Id" OtherKey="CreatedByUserId" Type="TrnBorrow" />
+      <Association Name="MstUser_MstBorrower" Member="MstBorrowers" ThisKey="Id" OtherKey="CreatedByUserId" Type="MstBorrower" />
+      <Association Name="MstUser_MstBorrower1" Member="MstBorrowers1" ThisKey="Id" OtherKey="UpdatedByUserId" Type="MstBorrower" />
+      <Association Name="MstUserType_MstUser" Member="MstUserType" ThisKey="UserTypeId" OtherKey="Id" Type="MstUserType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstUserType" Member="MstUserTypes">
+    <Type Name="MstUserType">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserType" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="MstUserType_MstUser" Member="MstUsers" ThisKey="Id" OtherKey="UserTypeId" Type="MstUser" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstLibraryCard" Member="MstLibraryCards">
+    <Type Name="MstLibraryCard">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LibraryCardNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ManualLibraryCardNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BorrowerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsPrinted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LibraryInChargeUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FootNote" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedByUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UpdatedByUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdatedDate" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="MstLibraryCard_TrnBorrow" Member="TrnBorrows" ThisKey="Id" OtherKey="LibraryCardId" Type="TrnBorrow" />
+      <Association Name="MstUser_MstLibraryCard" Member="MstUser" ThisKey="LibraryInChargeUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_MstLibraryCard1" Member="MstUser1" ThisKey="CreatedByUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_MstLibraryCard2" Member="MstUser2" ThisKey="UpdatedByUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstBorrower_MstLibraryCard" Member="MstBorrower" ThisKey="BorrowerId" OtherKey="Id" Type="MstBorrower" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstLibraryBook" Member="MstLibraryBooks">
+    <Type Name="MstLibraryBook">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BookNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Author" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="EditionNumber" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PlaceOfPublication" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CopyRightDate" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ISBN" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedByUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedBy" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UpdatedByUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdatedBy" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UpdatedDate" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="MstUser_MstLibraryBook" Member="MstUser" ThisKey="CreatedByUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_MstLibraryBook1" Member="MstUser1" ThisKey="UpdatedByUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TrnBorrow" Member="TrnBorrows">
+    <Type Name="TrnBorrow">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BorrowNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BookNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BorrowDate" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ManualBorrowNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BorrowerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LibraryCardId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PreparedByUser" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedByUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UpdatedByUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdatedDate" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="MstLibraryCard_TrnBorrow" Member="MstLibraryCard" ThisKey="LibraryCardId" OtherKey="Id" Type="MstLibraryCard" IsForeignKey="true" />
+      <Association Name="MstUser_TrnBorrow" Member="MstUser" ThisKey="UpdatedByUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_TrnBorrow1" Member="MstUser1" ThisKey="CreatedByUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstBorrower_TrnBorrow" Member="MstBorrower" ThisKey="BorrowerId" OtherKey="Id" Type="MstBorrower" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MstBorrower" Member="MstBorrowers">
+    <Type Name="MstBorrower">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BorrowerNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ManualBorrowerNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Department" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Course" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedByUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UpdatedByUserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UpdatedDate" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="BorrowerTypeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LibraryCardId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MstBorrower_MstLibraryCard" Member="MstLibraryCards" ThisKey="Id" OtherKey="BorrowerId" Type="MstLibraryCard" />
+      <Association Name="MstBorrower_TrnBorrow" Member="TrnBorrows" ThisKey="Id" OtherKey="BorrowerId" Type="TrnBorrow" />
+      <Association Name="MstUser_MstBorrower" Member="MstUser" ThisKey="CreatedByUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+      <Association Name="MstUser_MstBorrower1" Member="MstUser1" ThisKey="UpdatedByUserId" OtherKey="Id" Type="MstUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
